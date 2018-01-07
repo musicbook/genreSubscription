@@ -1,0 +1,18 @@
+version: "2"
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=genresubscription
+    ports:
+      - "5435:5432"
+  genresubscription-service:
+    #image: g-test
+    image: blajan/genre_subscription-api
+    environment:
+      - KUMULUZEE_DATASOURCES0_CONNECTIONURL=jdbc:postgresql://postgres:5432/genresubscription
+    ports:
+      - "8085:8085"
+    depends_on:
+      - postgres
