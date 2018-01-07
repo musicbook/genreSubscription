@@ -1,5 +1,7 @@
 package com.fri.musicbook;
 
+import com.kumuluz.ee.logs.cdi.Log;
+import com.kumuluz.ee.logs.cdi.LogParams;
 import org.eclipse.microprofile.metrics.annotation.Metered;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @Path("/genreSubscription")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+//@Log(LogParams.METRICS)
 public class GenreSubscriptionsResource {
 
     @Context
@@ -26,6 +29,7 @@ public class GenreSubscriptionsResource {
 
     @Metered(name = "getGenreSubscriptions")
     @GET
+    @Log(value = LogParams.METRICS)
     public Response getGenreSubscriptions() {
         System.out.println("getVsiGen");
         List<GenreSubscription> subs = gsb.getGenreSubscriptions();
@@ -36,6 +40,7 @@ public class GenreSubscriptionsResource {
     @Metered(name = "getGenreSubscription")
     @GET
     @Path("/{gsId}")
+    @Log(value = LogParams.METRICS, methodCall = false)
     public Response getGenre(@PathParam("gsId") String gsId) {
         System.out.println("get1Gen");
         GenreSubscription sub = gsb.getGenreSubscription(gsId);
