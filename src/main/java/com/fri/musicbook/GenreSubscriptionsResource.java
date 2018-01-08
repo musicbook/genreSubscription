@@ -21,6 +21,10 @@ import java.util.List;
 //@Log(LogParams.METRICS)
 public class GenreSubscriptionsResource {
 
+
+    //@Inject
+   // private ConfigProperties properties;
+
     @Context
     protected UriInfo uriInfo;
 
@@ -36,7 +40,27 @@ public class GenreSubscriptionsResource {
 
         return Response.ok(subs).build();
     }
+/*
+    @GET
+    @Path("/config")
+    public Response test() {
+        String response =
+                "{" +
+                        "\"stringProperty\": \"%s\"," +
+                        "\"booleanProperty\": %b," +
+                        "\"integerProperty\": %d" +
+                        "}";
 
+        response = String.format(
+                response,
+                properties.getStringProperty(),
+                properties.getBooleanProperty(),
+                properties.getIntegerProperty()
+        );
+
+        return Response.ok(response).build();
+    }
+*/
     @Metered(name = "getGenreSubscription")
     @GET
     @Path("/{gsId}")

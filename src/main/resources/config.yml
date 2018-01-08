@@ -4,12 +4,12 @@ kumuluzee:
     name: dev
   version: 1.0.0
   server:
-    base-url: http://localhost:8085
+    base-url: http://192.168.99.100:8085
     http:
       port: 8085
   datasources:
     - jndi-name: jdbc/GenreSubscriptionsDS
-      connection-url: jdbc:postgresql://localhost:5435/genresubscription
+      connection-url: jdbc:postgresql://192.168.99.100:5435/genresubscription
       username: postgres
       password: postgres
       max-pool-size: 20
@@ -29,9 +29,11 @@ kumuluzee:
 #  config:
 #    etcd:
 #      hosts: http://192.168.99.100:2379
-#  discovery:
-#    etcd:
-#      hosts: http://192.168.99.100:2379
+  discovery:
+    etcd:
+      hosts: http://192.168.99.100:2379
+    ttl: 20
+    ping-interval: 15
 
  # rest-properties:
     #external-dependencies:
@@ -60,3 +62,7 @@ kumuluzee:
                </Root>
            </Loggers>
        </Configuration>'
+#rest-config:
+#  string-property: Monday
+#  boolean-property: true
+#  integer-property: 23
