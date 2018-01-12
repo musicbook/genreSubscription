@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: genre-subscription
+spec:
+  type: NodePort
+  ports:
+  - port: 8086
+    protocol: TCP
+    targetPort: 8085
+  selector:
+    app: genre-subscription

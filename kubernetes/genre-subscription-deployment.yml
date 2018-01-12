@@ -1,0 +1,35 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: genre-subscription-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: genre-subscription
+    spec:
+      containers:
+      - image: blajan/genre_subscription-api
+        name: genre-subscription
+        env:
+          - name: KUMULUZEE_DISCOVERY_CLUSTER
+            value: bluemix
+          - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
+            value: http://etcd:2379
+          - name: KUMULUZEE_CONFIG_ETCD_HOSTS
+            value: http://etcd:2379
+          - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+            value: jdbc:postgresql://postgres-songs:5433/songs
+          - name: KUMULUZEE_DATASOURCES0_USERNAME
+            value: userdb
+          - name: KUMULUZEE_DATASOURCES0_PASSWORD
+            value: postgres
+          - name: KUMULUZEE_SERVER_BASEURL
+            value: http://169.51.16.117:32288
+          - name: KUMULUZEE_VERSION
+            value: 1.0.1
+        ports:
+        - containerPort: 8085
+          name: server
+          protocol: TCP
